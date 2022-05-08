@@ -32,6 +32,19 @@ async function run() {
             res.send(mobile);
         })
 
+        app.post('/mobile', async (req, res) => {
+            const newMobile = req.body;
+            const result = await mobileCollection.insertOne(newMobile);
+            res.send(result);
+        })
+
+        app.delete('/mobile/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await mobileCollection.deleteOne(query);
+            res.send(result);
+        })
+
     }
     finally {
 
